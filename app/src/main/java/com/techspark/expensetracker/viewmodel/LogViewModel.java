@@ -40,4 +40,8 @@ public class LogViewModel extends AndroidViewModel {
     public List<Log> getAllLogsByDate(String date) {
         return logRepository.getAllByDate(date);
     }
+
+    public double getSumByDate(String current_date) {
+        return logRepository.getSumByDate(current_date);
+    }
 }

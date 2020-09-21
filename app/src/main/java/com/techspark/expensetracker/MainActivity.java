@@ -1,5 +1,6 @@
 package com.techspark.expensetracker;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Observer;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     DatePicker datePicker;
     List<Log> dataSet;
     ImageView emptyImageView;
+    private String amount = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void getLogsBySelectedPeriod(final String selectedRange){
         class GetDetailsByDate extends AsyncTask<String,Void,Void> {
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected Void doInBackground(String... params) {
                 Date today = new Date();
@@ -123,11 +126,20 @@ public class MainActivity extends AppCompatActivity {
                         if(dataSet.size() == 0){
                             emptyImageView.setVisibility(View.VISIBLE);
                         }
+                        amount = logViewModel.getTotalSum()+"";
+                        total_sum_tv.setText("Amount: "+amount);
+                        if(Double.parseDouble(amount) < 0){
+                            total_sum_tv.setTextColor(getApplicationContext().getColor(R.color.red));
+                        }
                         logsAdapter.setLogs(dataSet);
                         break;
                     case "Today":
-
                         android.util.Log.i("MAIN_ACTIVITY","Today "+current_date);
+                        amount = logViewModel.getSumByDate(current_date)+"";
+                        total_sum_tv.setText("Amount: "+amount);
+                        if(Double.parseDouble(amount) < 0){
+                            total_sum_tv.setTextColor(getApplicationContext().getColor(R.color.red));
+                        }
                         dataSet = logViewModel.getAllLogsByDate(current_date);
                         if(dataSet.size() == 0){
                             emptyImageView.setVisibility(View.VISIBLE);
@@ -137,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
                     case "Yesterday":
                         android.util.Log.i("MAIN_ACTIVITY","Yesterday");
                         dataSet = logViewModel.getAllLogsByDate(yesterday);
+                        amount = logViewModel.getSumByDate(yesterday)+"";
+                        total_sum_tv.setText("Amount: "+amount);
+                        if(Double.parseDouble(amount) < 0){
+                            total_sum_tv.setTextColor(getApplicationContext().getColor(R.color.red));
+                        }
                         if(dataSet.size() == 0){
                             emptyImageView.setVisibility(View.VISIBLE);
                         }
@@ -152,6 +169,11 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         android.util.Log.i("MAIN_ACTIVITY","Default");
                         dataSet = logViewModel.getAllLogsByDate(selectedRange);
+                        amount = logViewModel.getSumByDate(selectedRange)+"";
+                        total_sum_tv.setText("Amount: "+amount);
+                        if(Double.parseDouble(amount) < 0){
+                            total_sum_tv.setTextColor(getApplicationContext().getColor(R.color.red));
+                        }
                         if(dataSet.size() == 0){
                             emptyImageView.setVisibility(View.VISIBLE);
                         }

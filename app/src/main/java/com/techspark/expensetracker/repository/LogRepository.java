@@ -38,4 +38,8 @@ public class LogRepository {
     public List<Log> getAllByDate(String date) {
         return logDao.getAllbyDate(date);
     }
+
+    public double getSumByDate(String current_date) {
+        return logDao.getSumByDate(current_date);
+    }
 }

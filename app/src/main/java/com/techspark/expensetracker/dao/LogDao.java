@@ -27,4 +27,7 @@ public interface LogDao {
 
     @Query("SELECT * FROM LOG WHERE date = :date")
     List<Log> getAllbyDate(String date);
+
+    @Query("SELECT SUM(amount) FROM LOG WHERE date = :current_date")
+    double getSumByDate(String current_date);
 }
