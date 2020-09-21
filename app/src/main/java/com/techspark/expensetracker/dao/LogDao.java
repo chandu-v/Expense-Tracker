@@ -21,4 +21,10 @@ public interface LogDao {
 
     @Query("SELECT SUM(amount) FROM LOG")
     double getTotalAmount();
+
+    @Query("SELECT * FROM LOG")
+    List<Log> getAllLogs();
+
+    @Query("SELECT * FROM LOG WHERE date = :date")
+    List<Log> getAllbyDate(String date);
 }

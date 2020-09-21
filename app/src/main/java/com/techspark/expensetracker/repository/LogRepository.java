@@ -30,4 +30,12 @@ public class LogRepository {
     }
 
     public double getSum(){ return logDao.getTotalAmount(); }
+
+    public List<Log> getAllLogs() {
+        return logDao.getAllLogs();
+    }
+
+    public List<Log> getAllByDate(String date) {
+        return logDao.getAllbyDate(date);
+    }
 }

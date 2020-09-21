@@ -31,4 +31,13 @@ public class LogViewModel extends AndroidViewModel {
     }
 
     public double getTotalSum(){ return logRepository.getSum(); }
+
+    public List<Log> getAllLogs() {
+        return logRepository.getAllLogs();
+    }
+
+
+    public List<Log> getAllLogsByDate(String date) {
+        return logRepository.getAllByDate(date);
+    }
 }

@@ -3,6 +3,7 @@ package com.techspark.expensetracker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class AddExpense extends AppCompatActivity {
         date_ev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                button.setVisibility(View.GONE);
                 datePicker.setVisibility(View.VISIBLE);
             }
         });
@@ -59,6 +61,7 @@ public class AddExpense extends AppCompatActivity {
                 public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
                     date_ev.setText(datePicker.getDayOfMonth()+"/"+(datePicker.getMonth()+1)+"/"+datePicker.getYear());
                     datePicker.setVisibility(View.GONE);
+                    button.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -82,7 +85,7 @@ public class AddExpense extends AppCompatActivity {
             public void onClick(View view) {
                 String title = title_ev.getText().toString();
                 String description  = description_ev.getText().toString();
-                double amount = Double.parseDouble(amount_ev.getText().toString());
+                double amount = Double.parseDouble(amount_ev.getText().toString().equalsIgnoreCase("")?"0":amount_ev.getText().toString());
                 String date = date_ev.getText().toString();
 
                 if(title.equalsIgnoreCase("") ||
@@ -114,6 +117,8 @@ public class AddExpense extends AppCompatActivity {
                         protected void onPostExecute(Void aVoid) {
                             super.onPostExecute(aVoid);
                             Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
                             finish();
                         }
                     }

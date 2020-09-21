@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".AddExpense">
 
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/toolbar"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:background="@color/colorPrimary">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/header"-->
+<!--            android:text="Add Entry"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="24dp"-->
+<!--            />-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="0dp"
@@ -19,7 +39,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/title_et"
@@ -89,6 +109,8 @@
         android:layout_marginEnd="8dp"
         android:focusableInTouchMode="true"
         android:hint="DD/MM/YYYY"
+        android:inputType="date"
+        android:focusable="false"
         android:selectAllOnFocus="false"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,20 +176,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8sp"
-        android:background="@android:color/holo_blue_light"
+        android:background="@color/colorPrimary"
         android:text="Add"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <DatePicker
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/primary_text_dark"
-        android:headerBackground="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
